@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+{% block title %}<title>Books</title>{% endblock %}
+{% block content %}
+
+    <table class="table" id="posts-table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% include 'shop_site/includes/partial_books_list.html' %}
+        </tbody>
+    </table>
+
+{% endblock %}
