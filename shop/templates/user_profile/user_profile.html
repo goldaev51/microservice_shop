@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>My Profile</h1>
+    <p><strong>First name:</strong> {% if user.first_name %}{{ user.first_name }}{% else %} not exists {% endif %} </p>
+    <p><strong>Last name:</strong> {% if user.last_name %}{{ user.last_name }}{% else %} not exists {% endif %} </p>
+    <p><strong>Email:</strong> {% if user.email %}{{ user.email }}{% else %} not exists {% endif %} </p>
+
+    <h2>Orders</h2>
+    {% for order in orders %}
+        <p><strong>Order id:</strong> {{ order.id }} </p>
+        <p><strong>Status:</strong> {{ order.status }} </p>
+        <p><strong>Delivery address:</strong> {{ order.delivery_address }} </p>
+        <hr>
+    {% empty %}
+        <tr>
+            <td colspan="8" class="text-center bg-warning">No orders</td>
+        </tr>
+    {% endfor %}
+
+
+
+{% endblock %}

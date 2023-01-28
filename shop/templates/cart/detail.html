@@ -1,0 +1,50 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+    {% if cart %}
+        <h1>Your shopping cart</h1>
+        <table class="cart table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+                <th>Unit price</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for item in cart %}
+                {% with book=item.book %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td><a href="{% url "cart:cart_remove" book.id %}">Remove</a></td>
+                        <td class="num">${{ item.price }}</td>
+                        <td class="num">${{ item.total_price }}</td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+            <tr class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <p class="text-right">
+            <a href="{% url "books:books-list" %}" class="button light">Continue shopping</a>
+            <a href="{% url "books:order-create" %}" class="button">Checkout</a>
+        </p>
+    {% else %}
+        <h1>Your shopping cart is empty</h1>
+        <p class="text-right">
+            <a href="{% url "books:books-list" %}" class="button light">Start shopping</a>
+        </p>
+    {% endif %}
+
+{% endblock %}
